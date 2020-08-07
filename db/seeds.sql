@@ -7,15 +7,15 @@ INSERT INTO burgers
 VALUES
     ('Bobbi');
 INSERT INTO burgers
-    (name, eaty)
+    (name, eaten)
 VALUES
     ('Sylvester', true);
 INSERT INTO burgers
-    (name, eaty)
+    (name, eaten)
 VALUES
     ('Marilyn Manson', true);
 INSERT INTO burgers
-    (name, eaty)
+    (name, eaten)
 VALUES
     ('Joe Biden', true);
 INSERT INTO burgers
