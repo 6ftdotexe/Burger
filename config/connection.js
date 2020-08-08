@@ -5,18 +5,15 @@ var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "page2110",
-  database: "burger_db"
+  password: "password",
+  database: "burgers_db"
 });
 
-// Make connection.
-connection.connect(function (err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + connection.threadId);
-});
+// Make connection
+connection.connect(function(err) {
+  if(err) throw err;
+  console.log("Connected as id: " + connection.threadId);
+})
 
 // Export connection for our ORM to use.
 module.exports = connection;

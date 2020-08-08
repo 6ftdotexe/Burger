@@ -1,32 +1,133 @@
-<h1>burgers!</h1>
+{{!-- <p>Connected to server (from index.handlebars file)</p> --}}
 
-<h2>burgers that are not eaten!</h2>
+<div class="containter">
 
-<ul>
-  {{#each burgers}}
-  {{#unless eaten}}
-  {{> burgers/burger-block eat=true}}
-  {{/unless}}
-  {{/each}}
-</ul>
+  {{!-- <h1>Eat-Da-Burger!</h1>
+  <br> --}}
+  <br>
+  <div class="row">
 
-<h2>burgers that are eaten!</h2>
+    {{!-- <div class="col-md-4"></div> --}}
 
-<ul>
-  {{#each burgers}}
-  {{#if eaten}}
-  {{> burgers/burger-block eat=false}}
-  {{/if}}
-  {{/each}}
-</ul>
+    <div class="col-md-4">
 
-<h2>Add a burger</h2>
-<form class="create-form">
+      <h3>Add a Burger</h3>
+      <p>Enter a burger you'd like to eat.</p>
 
-  <div class="form-group">
-    <label for="ca">burger Name:</label>
-    <input type="text" id="ca" name="name">
+      <div class="row">
+        <form class="form-inline" action="/burgers" method="POST">
+          <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control" id="burger_name" name="burger" placeholder="Name of Burger">
+          </div>
+          <button type="submit btn-primary" class="btn btn-primary mb-2">Add a burger</button>
+        </form>
+        <br>
+        {{!--
+      </div> --}}
+    </div>
+
   </div>
 
-  <button type="submit">Add burger</button>
-</form>
+  {{!-- <div class="col-md-4"></div> --}}
+
+</div>
+<br>
+
+{{!-- <img src="/assets/img/burger.png" id="burger"> --}}
+<br>
+
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-group">
+      <li class="list-group-item active">Burgers that are not devoured</li>
+      <li class="list-group-item">
+
+        {{#each burgerData}}
+        {{#unless this.devoured}}
+        <p>{{this.burger_name}}
+        {{!-- <p>{{this.id}}. {{this.burger_name}}</p> --}}
+        {{!-- <form method="POST" action="/burgers/update?_method=PUT"> --}}
+          {{!-- <form action="/{{this.id}}" method="PUT">
+            <input type="hidden" name="devoured" value="1"> --}}
+            <button class="btn btn-primary btn-sm devour-button" name="{{this.id}}" type="submit">Devour it!</button>
+            {{!-- </form> --}}
+        </p>
+          {{/unless}}
+          {{/each}}
+
+          {{!-- {{#each burgers}}
+            {{#if this.devoured}}
+             <p class="eaten">{{this.id}}. {{this.burger_name}}</p>
+           {{/if}}
+          {{/each}} --}}
+      </li>
+      </li>
+      {{!-- <li class="list-group-item">Morbi leo risus</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li> --}}
+    </ul>
+  </div>
+  <div class="col-md-4" id="burgerDiv">
+    <img src="/assets/img/burger.png" id="burger">
+  </div>
+  <div class="col-md-4">
+    <ul class="list-group">
+      
+      <li class="list-group-item list-group-item-danger">Burgers that are devoured</li>
+      <li class="list-group-item">
+         {{#each burgerData}}
+            {{#if this.devoured}}
+             <p>{{this.burger_name}}</p>
+           {{/if}}
+          {{/each}}
+
+
+        {{!-- {{#each burger_data}}
+			  	{{#if this.devoured}}
+			  		<input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly>
+				  {{/if}}
+			  {{/each}} --}}
+
+
+
+
+      {{!-- <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Morbi leo risus</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li> --}}
+      </li>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<br>
+</div>
+
+<script type="text/javascript">
+
+  // Activate devour button
+  $('.devour-button').on('click', function (event) {
+    console.log("Devour Button Clicked!");
+    event.preventDefault();
+
+    var id = $(this).attr("name");
+
+    // Send the PUT request.
+    $.ajax("/api/" + id, {
+      type: "PUT"
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+   /* var updatedBurger = {
+      burger: $(".devour-button" name = {{ this.id }});
+    }; /* */
+      
+
+</script>
